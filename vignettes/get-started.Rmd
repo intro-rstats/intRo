@@ -1,0 +1,36 @@
+---
+title: "Get started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Welcome!
+
+Hello! We hope you are as excited as we are about the upcoming *intRo* workshop.
+
+In order to get the most from the workshop, you will have to get yourself and your computer ready beforehand.
+
+# Software requirements
+
+You will need to install the following pieces of software:
+
+- The statistical [programming language](https://www.codecademy.com/resources/blog/programming-languages/) **R**. This will be the "engine" we will be using to do data visualisation and more.
+
+- The RStudio [IDE](https://www.codecademy.com/articles/what-is-an-ide). If R is the engine, RStudio is the "car", something that helps you take advantage of the powerful engine.
+
+# Install R
+
+
+
+# Install RStudio
+
