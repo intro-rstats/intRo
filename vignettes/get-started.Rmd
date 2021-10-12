@@ -22,7 +22,7 @@ In order to get the most from the workshop, you will have to get yourself and yo
 
 # Software requirements
 
-You will need to install the following pieces of software:
+You will need to install the following pieces of free software:
 
 - The statistical [programming language](https://www.codecademy.com/resources/blog/programming-languages/) **R**. This will be the "engine" we will be using to do data visualisation and more.
 
@@ -30,7 +30,19 @@ You will need to install the following pieces of software:
 
 # Install R
 
+Head over to the official R download page: <https://cloud.r-project.org>.
 
+The first heading says `Download and Intall R`. Click on the download link (choose the one with your operating system: Linux, macOS or Windows). You will be redirected to the download page for your operating system.
+
+If you have macOS, install the `Latest release` (`R-4.1.1-arm64` if you have a Mac with an M1 chip, `R-4.1.1` otherwise).
+
+If you have Windows, from the download page click on `install R for the first time` and follow the instructions on the page.
+
+Linux should come with R installed.
 
 # Install RStudio
+
+You can download RStudio from the official page: <https://www.rstudio.com/products/rstudio/download/>.
+
+You have to install `RStudio Desktop`.
 
