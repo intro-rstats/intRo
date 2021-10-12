@@ -44,5 +44,7 @@ Linux should come with R installed.
 
 You can download RStudio from the official page: <https://www.rstudio.com/products/rstudio/download/>.
 
-You have to install `RStudio Desktop`.
+Click on the `Download` button below `RStudio Desktop` and then download the recommended RStudio version for your operating system (no need to install R because you've already done that in the previous step).
+
+
 
