@@ -1,6 +1,6 @@
 Package: intRo
 Type: Package
-Title: "Learning materials for intRo"
+Title: Learning materials for intRo
 Date: 2021-10-12
 Version: 0.0.0.9000
 Authors@R: person(given = "Stefano",
@@ -8,8 +8,8 @@ Authors@R: person(given = "Stefano",
            role = c("aut", "cre"),
            email = paste0("stefano.coretta", "@", "gmail.com"),
            comment = c(ORCID = "0000-0001-9627-5532"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: It provides the learning materials from the workshop 'intRo:
+    Data visualisation with R'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -18,3 +18,4 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 URL: https://github.com/intro-rstats/intRo
+RoxygenNote: 7.1.2
