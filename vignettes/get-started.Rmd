@@ -22,13 +22,15 @@ In order to get the most from the workshop, you will have to get yourself and yo
 
 # Software requirements
 
-You will need to install the following pieces of free software:
+You will need to **install R and RStudio** for the workshop.
+Most beginners mix them up, but, to go with the popular car analogy, R is the car engine while RStudio is the car dashboard.
 
-- The statistical [programming language](https://www.codecademy.com/resources/blog/programming-languages/) **R**. This will be the "engine" we will be using to do data visualisation and more.
+The statistical [programming language](https://www.codecademy.com/resources/blog/programming-languages/) **R** is the "engine" we will be using to do data visualisation and more.
 
-- The RStudio [IDE](https://www.codecademy.com/articles/what-is-an-ide). If R is the engine, RStudio is the "car", something that helps you take advantage of the powerful engine.
+**RStudio** is an integrated development environment (or [IDE](https://www.codecademy.com/articles/what-is-an-ide)), i.e. something that helps you take advantage of the powerful R programming language.
+Think of RStudio as an interface to R (like the dashboard of a car is an interface to the engine).
 
-# Install R
+# 1. Install R
 
 Head over to the official R download page: <https://cloud.r-project.org>.
 
@@ -40,7 +42,7 @@ If you have Windows, from the download page click on `install R for the first ti
 
 Linux should come with R installed.
 
-# Install RStudio
+# 2. Install RStudio
 
 You can download RStudio from the official page: <https://www.rstudio.com/products/rstudio/download/>.
 
