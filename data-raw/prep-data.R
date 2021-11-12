@@ -9,3 +9,14 @@ usethis::use_data(social)
 
 endangered <- read_csv("data-raw/endangered_lang.csv")
 colnames(endangered) <- c("id", "name", "name_fr", "name_es", "countries", "country_code", "iso", "degree", "alternate", "endonym", "speakers", "sources", "latitude", "longitude", "location")
+usethis::use_data(endangered)
+
+harry_potter <- tibble(
+  house = c(
+    rep("Gryffindor", 90),
+    rep("Slytherin", 134),
+    rep("Hufflepuff", 91),
+    rep("Ravenclaw", 130)
+  )
+)
+usethis::use_data(harry_potter)
