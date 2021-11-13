@@ -1,0 +1,146 @@
+---
+title: "06 Tidy data"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(intRo)
+data("messy_fruit")
+data("slavery")
+library(palmerpenguins)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## (Un)tidy data
+
+Tidy data is just a data frame where columns are variables, rows are observations and cells are values.
+
+```{r tidy-fig, echo=FALSE, out.width=600, fig.align='center'}
+knitr::include_graphics("images/tidy-1.png")
+```
+
+
+### Messy fruit
+
+The following data frame is not tidy.
+
+```{r messy-fruit}
+messy_fruit
+```
+
+Look carefully at the data frame and answer the following question.
+
+```{r messy-q, echo=FALSE}
+question(
+  "Why do you think that is?",
+  answer("Cells do not contain values."),
+  answer("Rows are variables"),
+  answer("Not all columns are variables", correct = TRUE)
+)
+```
+
+## Pivoting
+
+We want to tidy the data frame so that it has two columns:
+
+- `status` with the selling status (`sold` or `bought`).
+
+- `fruit` with the fruit type (`orange`, `apple`, `banana`).
+
+- `count` with the count of fruit for that category.
+
+We can use `pivot_longer()` to make this wide data frame long.
+
+```{r tidy, exercise=TRUE}
+messy_fruit %>%
+  pivot_longer(
+    orange:banana,
+    names_to = "fruit",
+    values_to = "count"
+  )
+```
+
+The data frame is now tidy, because:
+
+- Each column is a variable (`status`, `fruit`, `count`).
+
+- Each row is an observation.
+
+- Each cell has a value.
+
+### Give it a go!
+
+Look at this data frame.
+The first column has the `flag` of the ships which enslaved people travelled on.
+The other columns describe the number of enslaved people who were disembarked in different geographical areas.
+
+```{r slavery}
+slavery
+```
+
+This data frame is not tidy.
+To make it tidy, we need to move the column names to a column named `region` and the counts of people to a column called `count`.
+
+```{r slavery-long, exercise=TRUE}
+slavery <- slavery %>%
+  pivot_longer(
+    # Which columns should we pivot?
+    ...,
+    # Where should the column names go?
+    ...,
+    # Where should the values go?
+    ...
+  )
+```
+
+## Separate and unite
+
+In some cases, a data frame might have one column with values from two or more variables.
+
+`separate()` lets you split the column into separate columns, while with `unite()` you can merge two or more columns into one.
+
+```{r sep-data, exercise=TRUE}
+
+```
+
+
+```{r separate, exercise=TRUE}
+
+```
+
+```{r unite, exercise=TRUE}
+
+```
+
+
+## Text data
+
+Let's load the `yoda_corpus` data frame.
+
+```{r yoda, exercise=TRUE}
+data("yoda_corpus")
+yoda_corpus
+```
+
+Now we would like to 
+
+```{r unnest, exercise=TRUE}
+library(tidytext)
+yoda_tok <- yoda_corpus %>%
+  unnest_tokens(word, text)
+```
+
+```{r sentiment, exercise=TRUE}
+yoda_tok %>%
+  filter(character == "YODA") %>%
+  right_join(y = get_sentiments("bing")) %>%
+  ggplot(aes(sentiment, fill = sentiment)) +
+  geom_bar()
+```
+
