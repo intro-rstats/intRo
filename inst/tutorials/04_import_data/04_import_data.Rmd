@@ -1,0 +1,265 @@
+---
+title: "04 Import and transform data"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(intRo)
+knitr::opts_chunk$set(echo = TRUE)
+fruits <- read_csv(system.file("extdata", "fruits.csv", package = "intRo"))
+data("pyramids")
+```
+
+
+## Import data
+
+So far we've been using ready-made data, by attaching it with the `data()` function. However, it's most common for data to be imported from files into R.
+
+Importing data in R is quite straightforward. Most data we use is in the form of tables: you have rows, columns, and values in each cell. Like an Excel spreadsheet. You will learn how to import tabular data now, but we will see how to import other kinds of data tomorrow.
+
+### Tabular data
+
+The simplest and most common way of storing tabular data is with *comma separated values* files. These files are simple text files, where each row has a set of values separated by commas `,`.
+
+The commas separate the columns of the table. Look at the following example:
+
+```
+fruit,quantity,provenance
+orange,2,Spain
+banana,4,Brazil
+apple,1,UK
+blueberry,15,UK
+```
+
+The first row is called the *header*. The header specifies the names of the columns in the file: here the columns are two and they are `fruit`, `quantity` and `provenance`. The column names are separated by a comma.
+
+The other rows have the values for each column, separated by commas. You can think of each row after the header as one observation.
+
+Comma separated files generally have the `.csv` extension.
+
+To import data from a `.csv` file into R, you can use the `read_csv()` function, from the tidyverse package [readr](https://readr.tidyverse.org). 
+
+First, attach the tidyverse (which includes readr).
+
+```{r tidyverse, exercise=TRUE}
+library(tidyverse)
+```
+
+`read_csv()` only needs you to specify where the file is, in other words the full path to the file.
+
+Add `read_csv()` below and include between the parenthesis the following path: `"./fruits.csv"`.
+
+```{r fruits, exercise=TRUE}
+fruits <- ...
+```
+
+### Inspect your data
+
+After importing the data, you can quickly look at them by simply typing the name of the data frame in the console and pressing enter.
+
+Here you can see how the output looks like.
+
+```{r}
+fruits
+```
+
+
+
+## Filter
+
+**Data transformation** is a fundamental aspect of data analysis.
+
+After you have imported data into R, you might want to filter rows, create new columns, or select some of the existing columns.
+
+We will work with the `pyramids` data frame.
+Let's load it first.
+
+```{r pyr, exercise=TRUE}
+data("pyramids")
+```
+
+Now inspect the data.
+
+```{r pyr-inspect, exercise=TRUE}
+
+```
+
+
+### Filter data
+
+You can filter a data frame with `filter()`, from the dplyr package.
+
+`filter()` needs two things:
+
+- The data frame you want to filter.
+
+- At least one rule to filter the data with.
+
+Let's filter `pyramids` so that it returns only pyramids from the Saqqara site.
+
+Couldn't be easier!
+
+```{r }
+pyramids %>%
+  filter(Site == "Saqqara")
+```
+
+The code above filters the rows so that only the rows where `Site` equals (`==`) `"Saqqara"` are returned.
+
+```{r n-pyr, echo=FALSE}
+question(
+  "How many pyramids are there in Saqqara?",
+  answer("8"),
+  answer("5", correct = TRUE),
+  answer("16"),
+  answer("2")
+)
+```
+
+### Logical operators
+
+The double equal sign we used above `==` is called a *logical operator*.
+Logical operators are special symbols that allow you to compare objects.
+
+There are the basic logical operators:
+
+- `A == B`: A is *equal* to B.
+- `A != B`: A in *not* equal to B.
+- `A > B`: A is *greater* than B.
+- `A < B`: A is *smaller* than B.
+
+Logical operators return a logical object, either `TRUE` or `FALSE`.
+
+```{r logic}
+10 > 4
+2 == 3
+```
+
+Try the logical operators out! Fill in the following code so that you get TRUE in the first 3 comparisons and FALSE in the last 3.
+
+```{r logic-ex, exercise=TRUE}
+# These should return `TRUE`
+... < 20
+"a" == ...
+"apple" != ...
+
+# These should return `FALSE`
+"zoo" ... "park"
+120 ... 43
+0.1 ... 0.002
+```
+
+### Multiple filtering
+
+You can filter a data frame depending on more than one column.
+Simply add more rules, separated by commas.
+
+```{r multi-filt, exercise=TRUE}
+pyramids %>%
+  filter(
+    Site == "Abydos",
+    Dynasty > 3
+  )
+```
+
+```{r aby-3, echo=FALSE}
+question(
+  "How many pyramids are there in Abydos that were build after the third dynasty?",
+  answer("10"),
+  answer("0"),
+  answer("3", correct = TRUE)
+)
+```
+
+Now try to find out how many pyramids are there that were built after the tenth dynasty an not in Dahshur.
+
+```{r dahshur-10, exercise=TRUE}
+pyramids %>%
+  filter(
+    ...,
+    ...
+  )
+```
+
+
+## Mutate
+
+What if you want to create a new column based on existing columns?
+
+You can create new columns with the `mutate()` function from dplyr.
+
+`mutate()` needs the name of the data frame you want to mutate, the name of the new column and the code to create it.
+
+```{r square}
+pyramids <- pyramids %>%
+  mutate(
+    # Note that here we use one equal sign `=`, not two.
+    # We are not comparing objects, but creating one.
+    square = `Base1 (m)` == `Base2 (m)`
+  )
+```
+
+This time we have saved the output of `mutate()` back into `pyramids`, so that we can use the new column in further code.
+
+```{r square-count}
+pyramids %>%
+  count(square)
+```
+
+The `count()` function counts the number of occurrences for each value of a column.
+
+Now create a new column called `mudbrick`.
+The column should have `TRUE` if `Material` is `Mudbrick`, `FALSE` otherwise.
+
+```{r material, exercise=TRUE}
+pyramids <- pyramids %>%
+  mutate(
+    ...
+  )
+```
+
+```{r mud-count-setup, echo=FALSE}
+pyramids <- pyramids %>%
+  mutate(
+    mudbrick = Material == "Mudbrick"
+  )
+```
+
+And now count how many pyramids are build with mudbrick.
+
+```{r mud-count, exercise=TRUE}
+pyramids %>%
+  ...
+```
+
+## Select
+
+What if you only want some columns? Use the `select()` function from dplyr.
+
+`select()` takes a list of unquoted column names (i.e. the bare names, without quotes `"`) separated by commas.
+
+```{r select, exercise=TRUE}
+pyramids %>%
+  select(Pharaoh, Site)
+```
+
+To remove one or more columns, prefix the column name with `-` (minus). All the other columns will be kept.
+
+```{r deselect, exercise=TRUE}
+pyramids %>%
+  select(-square, -mudbrick)
+```
+
+To select a range of columns you can include only the first and the last of the range, separated by `:`.
+
+```{r select-range, exercise=TRUE}
+pyramids %>%
+  select(`Modern name`:Dynasty)
+```
+

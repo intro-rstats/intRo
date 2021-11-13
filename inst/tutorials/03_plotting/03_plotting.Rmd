@@ -1,0 +1,93 @@
+---
+title: "03 Plotting"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(intRo)
+data("endangered")
+data("slavery_tot")
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## The basics
+
+The tidyverse package [ggplot2](https://ggplot2.tidyverse.org) provides ...
+
+```{r tidy-load, exercise=TRUE}
+library(tidyverse)
+```
+
+These are the minimum constituents of a ggplot.
+
+- The `data`: you have to specify the data frame with the data you want to plot.
+
+- The `mapping`: the mapping tells ggplot how to map data to parts of the plot like the axes or groupings within the data. These parts are called *aesthetics*, or `aes` for short.
+
+```{r}
+ggplot(
+  data = msleep,
+  mapping = aes(
+    x = sleep_total,
+    y = sleep_rem
+  )
+)
+```
+
+
+Build your first plot!
+
+```{r first-plot, exercise=TRUE}
+ggplot(
+  data = ...,
+  mapping = aes(
+    ...
+  )
+)
+```
+
+
+
+
+### Number of languages by endangerment status
+
+```{r}
+library(intRo)
+data("endangered")
+```
+
+
+```{r endanger, exercise=TRUE}
+endangered %>%
+  ggplot(aes(status)) +
+  geom_bar()
+```
+
+
+### Number of enslaved people by ship flag
+
+```{r slavery, exercise=TRUE}
+library(intRo)
+data("slavery")
+```
+
+
+```{r bare, exercise=TRUE}
+ggplot(
+  data = slavery_tot,
+  mapping = aes(country, enslaved)
+)
+```
+
+
+```{r bars, exercise=TRUE}
+ggplot(
+  data = slavery_tot,
+  mapping = aes(country, enslaved)
+) + geom_bar(stat = "identity")
+```
+
+
