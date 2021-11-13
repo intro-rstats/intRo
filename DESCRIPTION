@@ -15,7 +15,14 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
     knitr,
+    learnr,
     rmarkdown
+Imports:
+    tidyverse,
+    readr,
+    ggplot2,
+    dplyr,
+    tidyr
 VignetteBuilder: knitr
 URL: https://github.com/intro-rstats/intRo
 RoxygenNote: 7.1.2
