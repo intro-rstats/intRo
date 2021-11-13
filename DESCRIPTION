@@ -13,16 +13,18 @@ Description: It provides the learning materials from the workshop 'intRo:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
-    knitr,
-    learnr,
-    rmarkdown
 Imports:
     tidyverse,
     readr,
     ggplot2,
     dplyr,
-    tidyr
+    tidyr,
+    here,
+    knitr,
+    learnr,
+    rmarkdown,
+    palmerpenguins,
+    tidytext
 VignetteBuilder: knitr
 URL: https://github.com/intro-rstats/intRo
 RoxygenNote: 7.1.2
