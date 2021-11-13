@@ -31,5 +31,19 @@ usethis::use_data(df_ratios)
 slavery_tot <- read_csv("data-raw/Trans-Atlantic_Slave_Trade_totals.csv")
 usethis::use_data(slavery_tot)
 
+slavery <- read_csv("data-raw/Trans-Atlantic_Slave_Trade_Database.csv")
+usethis::use_data(slavery)
+
 pyramids <- read_csv("data-raw/pyramids.csv")
 usethis::use_data(pyramids)
+
+messy_fruit <- tibble(
+  status = c("sold", "bought"),
+  orange = c(3, 6),
+  apple = c(10, 25),
+  banana = c(4, 4)
+)
+usethis::use_data(messy_fruit)
+
+yoda_corpus <- read_csv("data-raw/yoda-corpus.csv")
+usethis::use_data(yoda_corpus)
