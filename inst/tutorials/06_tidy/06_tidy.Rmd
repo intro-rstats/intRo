@@ -8,13 +8,13 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 library(learnr)
 library(tidyverse)
 library(intRo)
 data("messy_fruit")
 data("slavery")
 library(palmerpenguins)
-knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## (Un)tidy data
@@ -38,7 +38,7 @@ Look carefully at the data frame and answer the following question.
 
 ```{r messy-q, echo=FALSE}
 question(
-  "Why do you think that is?",
+  "Why do you think that data frame is not tidy?",
   answer("Cells do not contain values."),
   answer("Rows are variables"),
   answer("Not all columns are variables", correct = TRUE)
@@ -47,7 +47,17 @@ question(
 
 ## Pivoting
 
-We want to tidy the data frame so that it has two columns:
+You can think of the `messy_fruit` data frame as *wide*.
+It's "wide" because it has columns for each fruit, when instead the fruit should be the values of a single column.
+
+```{r messy-again}
+messy_fruit
+```
+
+### From wide to long
+
+So we want to make the data frame *longer*: we want to move the fruit names to a column.
+In other words, we want to tidy the data frame so that it has three columns (instead of 4):
 
 - `status` with the selling status (`sold` or `bought`).
 
@@ -74,18 +84,26 @@ The data frame is now tidy, because:
 
 - Each cell has a value.
 
+The data frame is longer because now it has 6 rows and 3 columns, while before it had 2 rows and 4 columns.
+
+Do you see now why we say "wide" and "longer"?
+
 ### Give it a go!
 
-Look at this data frame.
-The first column has the `flag` of the ships which enslaved people travelled on.
-The other columns describe the number of enslaved people who were disembarked in different geographical areas.
+Inspect the following data frame.
+The first column lists the `flag` of the slaver ships.
+The other columns describe the number of enslaved people who were disembarked in different geographical regions.
 
-```{r slavery}
+```{r slavery, exercise=TRUE}
 slavery
 ```
 
 This data frame is not tidy.
-To make it tidy, we need to move the column names to a column named `region` and the counts of people to a column called `count`.
+Rather than having one column for each region, with counts in the cells, we want one column that tells us the region and another column with the counts.
+
+To make this data frame tidy, we need to move the column names of the regions to a column named `region` and the counts of people to a column called `count`.
+
+Try to do that yourself!
 
 ```{r slavery-long, exercise=TRUE}
 slavery <- slavery %>%
@@ -98,6 +116,10 @@ slavery <- slavery %>%
     ...
   )
 ```
+
+<div id="slavery-long-hint">
+**Hint:** Use `names_to = ...` and `values_to = ...`.
+</div>
 
 ## Separate and unite
 

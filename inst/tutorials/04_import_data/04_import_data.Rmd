@@ -8,20 +8,23 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-library(learnr)
-library(tidyverse)
-library(intRo)
 knitr::opts_chunk$set(echo = TRUE)
-fruits <- read_csv(system.file("extdata", "fruits.csv", package = "intRo"))
+library(learnr)
+library(intRo)
 data("pyramids")
+library(tidyverse)
+fruits <- read_csv(system.file("extdata", "fruits.csv", package = "intRo"))
 ```
 
 
 ## Import data
 
-So far we've been using ready-made data, by attaching it with the `data()` function. However, it's most common for data to be imported from files into R.
+So far we've been using ready-made data.
+However, it's most common for data to be imported from files into R.
 
-Importing data in R is quite straightforward. Most data we use is in the form of tables: you have rows, columns, and values in each cell. Like an Excel spreadsheet. You will learn how to import tabular data now, but we will see how to import other kinds of data tomorrow.
+Importing data in R is quite straightforward.
+Most of the data we use is in the form of tables: you have rows, columns, and values in each cell. Like an Excel spreadsheet.
+You will learn how to import tabular data now, but we will see how to import other kinds of data tomorrow.
 
 ### Tabular data
 
@@ -65,7 +68,7 @@ After importing the data, you can quickly look at them by simply typing the name
 
 Here you can see how the output looks like.
 
-```{r}
+```{r fruits}
 fruits
 ```
 
@@ -78,10 +81,10 @@ fruits
 After you have imported data into R, you might want to filter rows, create new columns, or select some of the existing columns.
 
 We will work with the `pyramids` data frame.
-Let's load it first.
+Here's what it looks like.
 
-```{r pyr, exercise=TRUE}
-data("pyramids")
+```{r pyr}
+pyramids
 ```
 
 Now inspect the data.
@@ -105,9 +108,11 @@ Let's filter `pyramids` so that it returns only pyramids from the Saqqara site.
 
 Couldn't be easier!
 
-```{r }
-pyramids %>%
-  filter(Site == "Saqqara")
+```{r saqq, exercise=TRUE}
+filter(
+  pyramids,            # The data frame
+  Site == "Saqqara"    # The rule
+)
 ```
 
 The code above filters the rows so that only the rows where `Site` equals (`==`) `"Saqqara"` are returned.
@@ -120,6 +125,14 @@ question(
   answer("16"),
   answer("2")
 )
+```
+
+Let's try again now using the pipe `%>%`.
+Do you remember how it works?
+
+```{r saqq-pipe, exercise=TRUE}
+... %>%
+  ...
 ```
 
 ### Logical operators
@@ -194,27 +207,52 @@ What if you want to create a new column based on existing columns?
 
 You can create new columns with the `mutate()` function from dplyr.
 
+### How to create a new column
+
 `mutate()` needs the name of the data frame you want to mutate, the name of the new column and the code to create it.
 
-```{r square}
-pyramids <- pyramids %>%
+```{r square, exercise=TRUE}
+pyramids <- pyramids %>%     # Ceci c'est un pipe. ;)
   mutate(
-    # Note that here we use one equal sign `=`, not two.
-    # We are not comparing objects, but creating one.
-    square = `Base1 (m)` == `Base2 (m)`
+    square = Base1 == Base2
   )
 ```
 
-This time we have saved the output of `mutate()` back into `pyramids`, so that we can use the new column in further code.
+Woah! A lot of new stuff going on.
+Let's unpack it.
 
-```{r square-count}
+This time we have saved the output of `mutate()` back into `pyramids` using the assignment symbol `<-`, so that we can use the new column in further code.
+In other words, we have overwritten `pyramids` with the mutated data frame.
+
+Then we use `mutate()` to create a new column called `square`.
+
+Note that the name of the new column is followed by *one* equal sign `=`, not two.
+We are not comparing objects, but creating one.
+
+We are telling `mutate()` to fill the new column with `TRUE` if `Base1` is the same length as `Base2` (the base is squared), with `FALSE` if `Base1` is not the same length as `Base2` (the base is not squared).
+
+To test if `Base1` is as long as `Base2`, we are using the logical operator `==` (two equal signs).
+We are comparing two objects here, so we use two equals, not just one.
+
+Check the data now to look at the `square` column.
+
+```{r pyr-square, exercise=TRUE, exercise.setup="square"}
+pyramids
+```
+
+### Count occurences
+
+We can use the `count()` function to count the number of occurrences for each value of a column.
+Let's count how many pyramids have a squared base.
+
+`count()` takes the name of the column you want to count values in.
+
+```{r square-count, exercise=TRUE, exercise.setup="square"}
 pyramids %>%
   count(square)
 ```
 
-The `count()` function counts the number of occurrences for each value of a column.
-
-Now create a new column called `mudbrick`.
+Now let's create a new column called `mudbrick`.
 The column should have `TRUE` if `Material` is `Mudbrick`, `FALSE` otherwise.
 
 ```{r material, exercise=TRUE}
@@ -227,6 +265,7 @@ pyramids <- pyramids %>%
 ```{r mud-count-setup, echo=FALSE}
 pyramids <- pyramids %>%
   mutate(
+    square = Base1 == Base2,
     mudbrick = Material == "Mudbrick"
   )
 ```
@@ -237,6 +276,11 @@ And now count how many pyramids are build with mudbrick.
 pyramids %>%
   ...
 ```
+
+<div id="mud-count-hint">
+**Hint:** Use the `count()` function.
+</div>
+
 
 ## Select
 
@@ -251,7 +295,7 @@ pyramids %>%
 
 To remove one or more columns, prefix the column name with `-` (minus). All the other columns will be kept.
 
-```{r deselect, exercise=TRUE}
+```{r deselect, exercise=TRUE, exercise.setup="mud-count-setup"}
 pyramids %>%
   select(-square, -mudbrick)
 ```
@@ -260,7 +304,10 @@ To select a range of columns you can include only the first and the last of the 
 
 ```{r select-range, exercise=TRUE}
 pyramids %>%
-  select(`Modern name`:Dynasty)
+  select(Modern_name:Dynasty)
 ```
 
 
+### You did it!
+
+Success! You completed this tutorial.

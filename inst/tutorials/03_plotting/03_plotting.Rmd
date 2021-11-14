@@ -116,6 +116,34 @@ endangered %>%
 Note how the counting is done automatically.
 R looks in the `status` column and counts how many times each value in the column occurs in the data frame.
 
+If you are baffled by that `%>%`, keep on.
+
+### What the pipe?!
+
+Wait, what is that thing, `%>%`?
+
+It's called a *pipe*.
+Think of a pipe as a teleporter.
+
+In the previous code, instead of specifying the data frame *inside* `ggplot()`, we teleport it into `ggplot()` by using the pipe.
+
+So the following are equivalent.
+
+```{r pipe, eval=FALSE}
+endangered %>%
+  ggplot(aes(status)) +
+  geom_bar()
+
+ggplot(
+  endangered,
+  aes(status)
+  ) +
+  geom_bar()
+```
+
+Don't worry too much if the concept is not clear.
+It should become clearer in later tutorials.
+
 ### Forced journey across the Atlantic
 
 European colonisers forced millions of Africans across the Atlantic, to the Americas.
