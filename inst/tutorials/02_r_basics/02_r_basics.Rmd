@@ -1,0 +1,132 @@
+---
+title: "02 R basics"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mathematical operations
+
+Run the following code to see the results.
+
+```{r maths, exercise=TRUE}
+14 + 75
+
+76.5 - 13.46
+
+5 * 2598
+
+4209 / 3
+```
+
+Now write the code for the following operations.
+
+1. Sum 5 with 8 and multiply by 3 (= 39).
+
+2. Divide 60 by the sum of 5 and 3 (= 7.5).
+
+3. Divide the sum of 76 and 43 multiplied by 5, by the difference between the product of 5 and 3 and the product of 7 and 8 (-14.5122).
+
+```{r paren, exercise=TRUE}
+# 1.
+
+# 2.
+
+# 3.
+
+```
+
+## Variables
+
+### Create a variable
+
+Let's try creating some variables.
+
+Assign the value `4` to a variable called `fruit`.
+Then subtract 1 from it.
+
+```{r var, exercise=TRUE}
+# Create the variable
+
+# Subtract 1 from it
+
+```
+
+### More than one value
+
+We can assign more than a value to a variable, as long as they are all of the same type (like numeric or a string).
+
+```{r combine, echo=FALSE}
+question(
+  "Which of the following functions can be used to assign multiple values to a variable?",
+  answer("`cat()`"),
+  answer("`print()`"),
+  answer("`c()`", correct = TRUE),
+  answer("`t()`")
+)
+```
+
+Now create a variable `houses` with the values `"Gryffindor", "Slytherin", "Hufflepuff"`.
+
+```{r houses, exercise=TRUE}
+houses <- ...
+```
+
+### Re-use variables
+
+Oops! We forgot one Hogwarts house.
+Let's fix that!
+
+```{r extra, echo=FALSE}
+question(
+  "Which of the following lines of code let us add an extra value to `houses`?",
+  answer('`houses <- c(houses, "Ravenclaw")`', correct = TRUE),
+  answer('`houses <- c("Ravenclaw")`'),
+  answer('`houses + "Ravenclaw"`')
+)
+```
+
+Now write the code here and run it to add the missing house!
+
+```{r missing, exercise=TRUE}
+houses ...
+```
+
+## Functions
+
+```{r function, echo=FALSE}
+question(
+  "Which of the following is true?",
+  answer("A function needs at least one argument."),
+  answer("Functions are strings."),
+  answer("A function can take one value."),
+  answer("Functions can take any number of arguments.", correct = TRUE)
+)
+```
+
+Run the following code to find out the mean number of fish spotted in a pond over four days.
+
+```{r mean, exercise=TRUE}
+fish <- c(1, 6, 2, 10)
+
+sum(fish) / length(fish)
+
+mean(fish)
+```
+
+```{r length, echo=FALSE}
+question(
+  "What is the `lenght()` function for?",
+  answer("It calculates the sum of the numbers in the variable."),
+  answer("It returns the size of the fish."),
+  answer("It returns the number of values in a variable.", correct = TRUE)
+)
+```
+

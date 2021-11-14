@@ -1,6 +1,9 @@
 ---
 title: "03 Plotting"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 ---
 
@@ -10,6 +13,10 @@ library(tidyverse)
 library(intRo)
 data("endangered")
 data("slavery_tot")
+data("slavery")
+data("harry_potter")
+data("land_use")
+library(ggmosaic)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -90,4 +97,81 @@ ggplot(
 ) + geom_bar(stat = "identity")
 ```
 
+## Fill and colour
+
+So far, we have used the `aes`thetics `x` for the *x*-axis and `y` for the *y*-axis.
+
+Among the many other `aes`thetics you can specify, there are `fill` and `colour`.
+
+### Fill
+
+The `fill` aesthetic let's you fill bars or areas with different colours depending on the values of a specified column.
+
+Let's recreate the plot on colonial slavery, this time adding some colour. Complete the following code by specifying that `fill` should be based on `country`.
+
+```{r slavery-fill, exercise=TRUE}
+slavery_dis %>%
+  ggplot(
+    aes(flag, count, ...)
+  ) +
+  geom_bar(stat = "identity")
+```
+
+We can improve this plot by reordering the flags based on descending number of disembarked people, with `reorder(flag, desc(count))`.
+
+```{r slavery-fill-ord}
+slavery_dis %>%
+  ggplot(
+    aes(
+      reorder(flag, desc(count)),
+      count,
+      fill = country
+    )
+  ) +
+  geom_bar(stat = "identity") +
+  labs(x = "Flag", y = "Number of people (millions)")
+```
+
+What if we want to move the colour legend to the bottom of the plot?
+
+Check out the documentation of `theme` by typing `?theme` in the RStudio console and press enter.
+Search for the word `position`.
+
+```{r legend-pos, echo=FALSE}
+question(
+  "Which of the following moves the legend to the bottom of the plot?",
+  answer('`legend("bottom")`'),
+  answer('`theme(legend.position = "bottom")`', correct = TRUE),
+  answer('`theme(legend.bottom)`')
+)
+```
+
+### Colour
+
+`colour` works like fill, but it is used with borders or lines of certain geometries like `geom_point()` and `geom_line()`.
+
+In the following plot, we wan to visualise the change in use of land across the globe through time.
+There are three uses in data frame: `built_up` for construction land, `cropland` for land use for crops, and `grazing` for land used in animal foraging.
+Land `area` is in billion hectares.
+
+Add the aesthetics to the following code and check the resulting plot.
+The plot needs `year` and `area` as the axes and `use` for the `colour` aesthetics.
+
+```{r land-use, exercise=TRUE}
+land_use %>%
+  ggplot(aes(..., ..., ...)) +
+  geom_line(size = 2)
+```
+
+## Line type
+
+If we wish to use a different type of line depending on the values of a column, we can use the `linetype` aesthetic.
+
+Change the plot on land use to use both `colour` and `linetype` to differentiate the type of use.
+
+```{r land-use-line, exercise=TRUE}
+land_use %>%
+  ggplot(aes(..., ..., ...)) +
+  geom_line(size = 2)
+```
 

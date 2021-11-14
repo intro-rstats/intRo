@@ -1,0 +1,23 @@
+---
+title: "07 Advanced skills"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## More plots
+
+```{r}
+endangered %>%
+  ggplot() +
+  geom_mosaic(
+    aes(x = product(Macroarea), fill = status), divider = mosaic("v")
+  ) +
+  theme_mosaic()
+```
+
+Diverging stacked bar chart for questionnaire data.
