@@ -12,7 +12,33 @@ library(learnr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Welcome
+
+### You made it!
+
+```{r high-5, echo=FALSE, out.height=600, fig.align='center'}
+knitr::include_graphics("images/viktor-nikolaienko-uosfneTS2eQ-unsplash.jpg")
+```
+
+<span style="font-size: 0.5em;">Photo by <a href="https://unsplash.com/@greenxiii?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Viktor Nikolaienko</a> on <a href="https://unsplash.com/s/photos/high-five?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+
+You made it! You survived the first session and now it's time to try out some R.
+
+We will use self-guided tutorials throughout the workshop.
+Just read the instructions and test your skills by writing and running code in the dedicated boxes.
+If you see three dots `...` in the code box, you have to delete them and write code instead based on the prompt.
+
+Sometimes there will be multiple-choice questions. Pick the correct answer and hit `Submit Answer` to check it.
+
+When you are ready to move to the next section, just click `Next topic` or `Continue`.
+
+If you get stuck, ask the instructor for help!
+
+Enjoy 🙂
+
 ## Mathematical operations
+
+Let's start with some basic mathematical operations.
 
 Run the following code to see the results.
 
@@ -26,21 +52,23 @@ Run the following code to see the results.
 4209 / 3
 ```
 
-Now write the code for the following operations.
+Now is your time to try!
 
-1. Sum 5 with 8 and multiply by 3 (= 39).
+Write the code to calculate the following:
 
-2. Divide 60 by the sum of 5 and 3 (= 7.5).
+1. Sum 5 with 8 and multiply by 3 (should be `39`).
 
-3. Divide the sum of 76 and 43 multiplied by 5, by the difference between the product of 5 and 3 and the product of 7 and 8 (-14.5122).
+2. Divide 60 by the sum of 5 and 3 (should be `7.5`).
+
+3. Divide the sum of 76 and 43 multiplied by 5, by the difference between the product of 5 and 3 and the product of 7 and 8 (should be `-14.5122`).
 
 ```{r paren, exercise=TRUE}
 # 1.
-
+...
 # 2.
-
+...
 # 3.
-
+...
 ```
 
 ## Variables
@@ -54,9 +82,9 @@ Then subtract 1 from it.
 
 ```{r var, exercise=TRUE}
 # Create the variable
-
+...
 # Subtract 1 from it
-
+...
 ```
 
 ### More than one value
@@ -111,7 +139,9 @@ question(
 )
 ```
 
-Run the following code to find out the mean number of fish spotted in a pond over four days.
+### Like fish in a pond
+
+Run the following code to find out the mean number of fish spotted in the Water of Leith over four days. 🐡🐠🐟
 
 ```{r mean, exercise=TRUE}
 fish <- c(1, 6, 2, 10)
@@ -123,10 +153,15 @@ mean(fish)
 
 ```{r length, echo=FALSE}
 question(
-  "What is the `lenght()` function for?",
+  "What does the `lenght()` function do?",
   answer("It calculates the sum of the numbers in the variable."),
   answer("It returns the size of the fish."),
   answer("It returns the number of values in a variable.", correct = TRUE)
 )
 ```
 
+### You did it!
+
+Awesome! You finished the first tutorial.
+
+We hope you are looking forward to the next.
