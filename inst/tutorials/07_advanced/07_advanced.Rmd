@@ -1,6 +1,9 @@
 ---
 title: "07 Advanced skills"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 ---
 
@@ -9,7 +12,11 @@ library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## More plots
+## Maps, maps, maps!
+
+
+
+## Getting artsy with mosaic plots
 
 ```{r}
 endangered %>%
@@ -19,5 +26,7 @@ endangered %>%
   ) +
   theme_mosaic()
 ```
+
+## Visualise questionnaires
 
 Diverging stacked bar chart for questionnaire data.

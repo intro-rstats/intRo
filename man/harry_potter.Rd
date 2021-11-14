@@ -5,7 +5,7 @@
 \alias{harry_potter}
 \title{Astrological sign and Hogwarts houses}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 447 rows and 2 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 447 rows and 3 columns.
 }
 \source{
 \url{https://imgur.com/gallery/wbuRF}
