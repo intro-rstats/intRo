@@ -9,24 +9,33 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(tidyverse)
 library(intRo)
 data("endangered")
 data("slavery_tot")
 data("slavery")
 data("harry_potter")
 data("land_use")
-library(ggmosaic)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## The basics
 
-The tidyverse package [ggplot2](https://ggplot2.tidyverse.org) provides ...
+### Start here
+
+The tidyverse package [ggplot2](https://ggplot2.tidyverse.org) provides users with a consistent set of functions to create captivating graphics. 
+To be able to use the functions in a package, you first need to attach the package.
+Here, we can attach the entire tidyverse, which includes ggplot2.
+
+You only have to attach packages once, when you start your R session in RStudio.
+They will stay attached until you close RStudio and end the R session.
+
+Attach the tidyverse now.
 
 ```{r tidy-load, exercise=TRUE}
 library(tidyverse)
 ```
+
+### A basic plot
 
 These are the minimum constituents of a ggplot.
 
@@ -34,7 +43,13 @@ These are the minimum constituents of a ggplot.
 
 - The `mapping`: the mapping tells ggplot how to map data to parts of the plot like the axes or groupings within the data. These parts are called *aesthetics*, or `aes` for short.
 
-```{r}
+You can specify the data and mapping with the `data` and `mapping` arguments of the `ggplot()` function.
+
+Note that the `mapping` argument is always specified with `aes()`.
+
+In the following bare plot, we are just mapping the total time of sleep (`sleep_total`) to the *x*-axis, and the time of REM (`sleep_rem`) to the *y*-axis.
+
+```{r sleep, exercise=TRUE, exercise.setup = "tidy-load"}
 ggplot(
   data = msleep,
   mapping = aes(
@@ -44,58 +59,96 @@ ggplot(
 )
 ```
 
+### Let's add geometries
 
-Build your first plot!
+Nice, but we are missing the most important part: showing the data!
 
-```{r first-plot, exercise=TRUE}
+Data is represented with *geometries*, or `geom`s for short.
+`geom`s are added to the base ggplot with functions whose names all start with `geom_`.
+
+For this plot, you want to use `geom_point()`.
+This geom simply adds points to the plot based on the data in the `msleep` data frame.
+
+Add the geom to the following code and run it.
+
+Note that the `data` and `mapping` arguments left explicit in the `ggplot()` function, since they are obligatory and they are specified in that order (try running `?ggplot` in the console to see all the arguments of the function).
+
+```{r first-plot, exercise=TRUE, exercise.setup = "tidy-load"}
 ggplot(
-  data = ...,
-  mapping = aes(
-    ...
-  )
-)
+  msleep,
+  aes(sleep_total, sleep_rem)
+) +
+  ...
 ```
 
 
+This type of plot, with two continuous axes and data represented by points, is called a **scatter plot**
 
+## Bar charts
 
-### Number of languages by endangerment status
+Another common type of plot is the **bar chart**.
 
-```{r}
-library(intRo)
-data("endangered")
+Bar charts are useful when you are counting things.
+In the following example, we will be counting the number of languages by their endangerment status.
+
+### Do you understand me?
+
+There are thousands of languages in the world, but most of them are loosing speakers, and some are already no longer spoken.
+The endangerment status of a language goes from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left).
+
+The `endangered` data frame contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org).
+Here's what it looks like.
+
+```{r endangered}
+endangered
 ```
 
+To create a bar chart, add `geom_bar()` to the plot.
 
-```{r endanger, exercise=TRUE}
+You only need one axis, the *x* axis to be precise, because the *y*-axis will always have counts.
+
+```{r endangered-bars, exercise=TRUE, exercise.setup = "tidy-load"}
 endangered %>%
   ggplot(aes(status)) +
   geom_bar()
 ```
 
+Note how the counting is done automatically.
+R looks in the `status` column and counts how many times each value in the column occurs in the data frame.
 
-### Number of enslaved people by ship flag
+### Forced journey across the Atlantic
 
-```{r slavery, exercise=TRUE}
-library(intRo)
-data("slavery")
+European colonisers forced millions of Africans across the Atlantic, to the Americas.
+Between 1500 and 1900, more than 12 million people were enslaved and brought to the New World.
+
+The `slavery_tot` data frame contains the number of enslaved people disembarked in the Americas according to digitised historical records, curated by the [Slave Voyages](https://slavevoyages.org) project.
+
+```{r slavery}
+slavery_tot
 ```
 
+Let's create a bar chart with number of enslaved people, separated by the flag of the ship they travelled on.
 
-```{r bare, exercise=TRUE}
+We can use `geom_bar()` as we did in the previous example, but now there's a catch.
+
+In the `endangered` data frame, `geom_bar()` did the counting of languages for each endangerment status.
+But now, the data frame already holds the counts!
+
+Since `slavery_tot` already has counts in the `enslaved` column, we can specify *both* the *x*-axis (`flag`) and the *y*-axis (`enslaved`).
+Then we have to tell `geom_bar()` that we have already done the counting: we can do this by specifying `stat = "identity"` (the default is `stat = "count"`).
+
+```{r slavery-bars, exercise=TRUE, exercise.setup = "tidy-load"}
 ggplot(
-  data = slavery_tot,
-  mapping = aes(country, enslaved)
-)
+  slavery_tot,
+  aes(flag, enslaved)
+) +
+  ...
 ```
 
-
-```{r bars, exercise=TRUE}
-ggplot(
-  data = slavery_tot,
-  mapping = aes(country, enslaved)
-) + geom_bar(stat = "identity")
+```{r slavery-bars-hint}
+geom_bar(stat = "identity")
 ```
+
 
 ## Fill and colour
 
@@ -109,7 +162,7 @@ The `fill` aesthetic let's you fill bars or areas with different colours dependi
 
 Let's recreate the plot on colonial slavery, this time adding some colour. Complete the following code by specifying that `fill` should be based on `country`.
 
-```{r slavery-fill, exercise=TRUE}
+```{r slavery-fill, exercise=TRUE, exercise.setup = "tidy-load"}
 slavery_dis %>%
   ggplot(
     aes(flag, count, ...)
@@ -119,7 +172,7 @@ slavery_dis %>%
 
 We can improve this plot by reordering the flags based on descending number of disembarked people, with `reorder(flag, desc(count))`.
 
-```{r slavery-fill-ord}
+```{r slavery-fill-ord, exercise=TRUE, exercise.setup = "tidy-load"}
 slavery_dis %>%
   ggplot(
     aes(
@@ -146,6 +199,29 @@ question(
 )
 ```
 
+### Move the legend
+
+Now move the legend to the `"bottom"` of the chart.
+
+```{r slavery-legend, exercise=TRUE, exercise.setup = "tidy-load"}
+slavery_dis %>%
+  ggplot(
+    aes(
+      reorder(flag, desc(count)),
+      count,
+      fill = country
+    )
+  ) +
+  geom_bar(stat = "identity") +
+  labs(x = "Flag", y = "Number of people (millions)") +
+  ...
+```
+
+```{r slavery-legend-hint}
+theme(legend.position = "...")
+```
+
+
 ### Colour
 
 `colour` works like fill, but it is used with borders or lines of certain geometries like `geom_point()` and `geom_line()`.
@@ -157,7 +233,7 @@ Land `area` is in billion hectares.
 Add the aesthetics to the following code and check the resulting plot.
 The plot needs `year` and `area` as the axes and `use` for the `colour` aesthetics.
 
-```{r land-use, exercise=TRUE}
+```{r land-use, exercise=TRUE, exercise.setup = "tidy-load"}
 land_use %>%
   ggplot(aes(..., ..., ...)) +
   geom_line(size = 2)
@@ -167,11 +243,14 @@ land_use %>%
 
 If we wish to use a different type of line depending on the values of a column, we can use the `linetype` aesthetic.
 
-Change the plot on land use to use both `colour` and `linetype` to differentiate the type of use.
+Change the plot on land use so that it uses both `colour` and `linetype` to differentiate the type of land use.
 
-```{r land-use-line, exercise=TRUE}
+```{r land-use-line, exercise=TRUE, exercise.setup = "tidy-load"}
 land_use %>%
   ggplot(aes(..., ..., ...)) +
   geom_line(size = 2)
 ```
 
+### The end!
+
+Congratulations! You completed this tutorial.
