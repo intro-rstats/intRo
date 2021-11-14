@@ -11,9 +11,11 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 library(learnr)
 library(tidyverse)
+library(tidytext)
 library(intRo)
 data("messy_fruit")
 data("slavery")
+data("yoda_corpus")
 library(palmerpenguins)
 ```
 
@@ -143,26 +145,70 @@ In some cases, a data frame might have one column with values from two or more v
 
 ## Text data
 
-Let's load the `yoda_corpus` data frame.
+We've been using tabular data so far.
+However, sometimes we want to work with text data.
+
+You can import text data in R and manipulate it with the tidytext package.
+Although tidytext is not part of the tidyverse collection, it has been designed to work well with it.
+
+### Easy working with text is
+
+There isn't enough time to go through all of the ins and outs of tidytext, so we will only scratch the surface.
+
+If you want to learn more, there's a whole book dedicated to it! Check it out here: <https://www.tidytextmining.com>.
+
+We will use a corpus of dialogues from the Star Wars movies that involve the world's favourite green creature, Yoda.
+
+In fact, since R works best with tabular data, this text corpus has been shaped as a table.
+
+Check out what the `yoda_corpus` looks like.
 
 ```{r yoda, exercise=TRUE}
-data("yoda_corpus")
 yoda_corpus
 ```
 
-Now we would like to 
+
+### Revealed your opinion is
+
+Let's do a simple sentiment analysis of Yoda dialogues.
+
+The first thing we do is to "unnest" the text into individual "tokens", or, in other words, words.
+
+We can achieve that with `unnest_tokens()` from tidytext.
+
+First, let's attach tidytext.
+
+```{r tidytext, exercise=TRUE}
+library(tidytext)
+```
+
+Now let's unnest the `text` column.
+`unnest_tokens()` needs the name of the column to create and the column with the text to unnest.
 
 ```{r unnest, exercise=TRUE}
-library(tidytext)
+yoda_tok <- yoda_corpus %>%
+  unnest_tokens(word, text)
+
+yoda_tok
+```
+
+And now let's do some plotting!
+Should Yoda swallow a chill pill?
+
+```{r sentiment-setup, echo=FALSE}
 yoda_tok <- yoda_corpus %>%
   unnest_tokens(word, text)
 ```
 
-```{r sentiment, exercise=TRUE}
+```{r sentiment, exercise=TRUE, message=FALSE}
 yoda_tok %>%
   filter(character == "YODA") %>%
+  # Never mind the following line for now.
   right_join(y = get_sentiments("bing")) %>%
   ggplot(aes(sentiment, fill = sentiment)) +
   geom_bar()
 ```
 
+### You're done!
+
+Good job!
