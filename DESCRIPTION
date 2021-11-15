@@ -15,6 +15,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
+    ggalluvial,
     ggplot2,
     ggmosaic,
     here,
@@ -22,6 +23,8 @@ Imports:
     learnr,
     palmerpenguins,
     readr,
+    rnaturalearth,
+    rnaturalearthdata,
     rmarkdown,
     tidyr,
     tidytext,
