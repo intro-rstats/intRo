@@ -8,7 +8,6 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-library(learnr)
 library(intRo)
 data("pyramids")
 library(tidyverse)
