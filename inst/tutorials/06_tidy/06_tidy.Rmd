@@ -8,7 +8,6 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(learnr)
 library(tidyverse)
 library(tidytext)
@@ -17,6 +16,7 @@ data("messy_fruit")
 data("slavery")
 data("yoda_corpus")
 library(palmerpenguins)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## (Un)tidy data

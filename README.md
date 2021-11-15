@@ -7,7 +7,7 @@
 
 <!-- badges: start -->
 
-![](https://img.shields.io/badge/version-1.0.2-4d2c91.svg)
+![](https://img.shields.io/badge/version-1.0.3-4d2c91.svg)
 <!-- badges: end -->
 
 Here you can find the **learning materials** for the workshop *intRo:

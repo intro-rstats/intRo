@@ -8,12 +8,12 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(learnr)
 library(intRo)
 data("pyramids")
 library(tidyverse)
 fruits <- read_csv(system.file("extdata", "fruits.csv", package = "intRo"))
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
@@ -60,8 +60,13 @@ Add `read_csv()` below and include between the parenthesis the following path: `
 It's a web link! Yes, you can even read data from the internet directly.
 
 ```{r fruits, exercise=TRUE}
-fruits <- ...
+
 ```
+
+```{r fruits-hint, echo=FALSE, eval=FALSE}
+fruits <- read_csv("")
+```
+
 
 ### Inspect your data
 
