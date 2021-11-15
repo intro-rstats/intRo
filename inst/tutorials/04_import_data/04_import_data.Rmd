@@ -56,7 +56,8 @@ library(tidyverse)
 
 `read_csv()` only needs you to specify where the file is, in other words the full path to the file.
 
-Add `read_csv()` below and include between the parenthesis the following path: `"./fruits.csv"`.
+Add `read_csv()` below and include between the parenthesis the following path: `"https://bit.ly/3HmuVR5"`.
+It's a web link! Yes, you can even read data from the internet directly.
 
 ```{r fruits, exercise=TRUE}
 fruits <- ...
