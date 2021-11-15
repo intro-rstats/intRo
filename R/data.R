@@ -1,3 +1,11 @@
+#' Geographic coordinates of the Albanian capitals
+#'
+#' A data frame with latitude, longitude and name of the capital cities of the
+#' administrative regions of Albania.
+#'
+#' @source \url{https://data.humdata.org/dataset/albania-administrative-level-0-3-boundaries}
+"alb_capitals"
+
 #' Student/teacher ratio by country
 #'
 #' A data frame containing the student-to-teacher ratio in the world's countries.
@@ -11,6 +19,13 @@
 #'
 #' @source \url{https://github.com/glottolog/glottolog-cldf}
 "endangered"
+
+#' Europe
+#'
+#' Political boundaries of European countries.
+#'
+#' @source \url{https://www.naturalearthdata.com}
+"europe"
 
 #' Astrological sign and Hogwarts houses
 #'
@@ -40,6 +55,13 @@
 #'
 #' @source Stefano Coretta
 "messy_fruit"
+
+#' Top Personality Dataset
+#'
+#' (MBTI) Myers-Briggs Personality Type Dataset.
+#'
+#' @source Arslan Ali, \url{https://www.kaggle.com/arslanali4343/top-personality-dataset}
+"personality"
 
 #' The pyramids of Egypt
 #'

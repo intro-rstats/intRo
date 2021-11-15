@@ -78,3 +78,16 @@ land_use <- land_use_untidy %>%
   pivot_longer(built_up:cropland, names_to = "use", values_to = "area") %>%
   mutate(area = area/1000000000)
 usethis::use_data(land_use)
+
+library(rnaturalearth)
+europe <- ne_countries(continent = "Europe", scale = "large", returnclass = "sf")
+usethis::use_data(europe)
+alb_cities <- read_csv("./data-raw/alb-cities.csv")
+alb_capitals <- alb_cities %>% filter(!is.na(capital))
+usethis::use_data(alb_capitals)
+
+personality <- read_csv("data-raw/2018-personality-data.csv") %>%
+  mutate(across(where(is.numeric), round)) %>%
+  pivot_longer(openness:extraversion, names_to = "trait", "response") %>%
+  select(-userid)
+usethis::use_data(personality)
