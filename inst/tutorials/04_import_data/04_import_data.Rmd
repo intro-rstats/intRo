@@ -5,9 +5,12 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
+description: >
+  Import and transform data with the tidyverse.
 ---
 
 ```{r setup, include=FALSE}
+library(learnr)
 library(intRo)
 data("pyramids")
 library(tidyverse)
@@ -136,8 +139,7 @@ Let's try again now using the pipe `%>%`.
 Do you remember how it works?
 
 ```{r saqq-pipe, exercise=TRUE}
-... %>%
-  ...
+
 ```
 
 ### Logical operators
@@ -161,7 +163,7 @@ Logical operators return a logical object, either `TRUE` or `FALSE`.
 
 Try the logical operators out! Fill in the following code so that you get TRUE in the first 3 comparisons and FALSE in the last 3.
 
-```{r logic-ex, exercise=TRUE}
+```{r logic-ex, exercise=TRUE, eval=FALSE}
 # These should return `TRUE`
 ... < 20
 "a" == ...

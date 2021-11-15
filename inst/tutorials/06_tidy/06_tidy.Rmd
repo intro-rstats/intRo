@@ -5,6 +5,8 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
+description: >
+  Lear about tidy data, untidy data, and how to tidy up untidy data.
 ---
 
 ```{r setup, include=FALSE}

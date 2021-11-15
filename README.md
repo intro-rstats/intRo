@@ -7,7 +7,7 @@
 
 <!-- badges: start -->
 
-![](https://img.shields.io/badge/version-1.0.4-4d2c91.svg)
+![](https://img.shields.io/badge/version-1.0.5-4d2c91.svg)
 <!-- badges: end -->
 
 Here you can find the **learning materials** for the workshop *intRo:
@@ -54,5 +54,5 @@ To install intRo, run the following lines of code in the console.
 
 ``` r
 install.packages("remotes")
-remotes::install_github("intro-rstats/intRo@v1.0.4", build_vignettes = TRUE)
+remotes::install_github("intro-rstats/intRo@v1.0.5", build_vignettes = TRUE)
 ```

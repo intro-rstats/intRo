@@ -5,6 +5,8 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
+description: >
+  A showreel of advanced plotting and transformation skills.
 ---
 
 ```{r setup, include=FALSE}

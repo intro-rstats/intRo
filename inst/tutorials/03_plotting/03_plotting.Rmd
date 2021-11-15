@@ -5,6 +5,8 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
+description: >
+  Create captivating plots with the tidyverse and ggplot2.
 ---
 
 ```{r setup, include=FALSE}
