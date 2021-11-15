@@ -48,5 +48,16 @@ You can download RStudio from the official page: <https://www.rstudio.com/produc
 
 Click on the `Download` button below `RStudio Desktop` and then download the recommended RStudio version for your operating system (no need to install R because you've already done that in the previous step).
 
+# 3. Install the workshop materials
 
+You can install the workshop materials by simply installing the intRo package.
 
+To do so, open RStudio and paste the following lines of code into the Console (the bottom left panel).
+
+```r
+install.packages("remotes")
+remotes::install_github("intro-rstats/intRo", build_vignettes = TRUE)
+```
+
+Then press enter/return to run the code.
+All the necessary packages will be installed and the materials will be downloaded.
