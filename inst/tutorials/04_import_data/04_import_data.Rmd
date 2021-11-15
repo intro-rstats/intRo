@@ -68,7 +68,7 @@ After importing the data, you can quickly look at them by simply typing the name
 
 Here you can see how the output looks like.
 
-```{r fruits}
+```{r fruits-insp}
 fruits
 ```
 
