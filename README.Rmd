@@ -54,6 +54,6 @@ To install intRo, run the following lines of code in the console.
 
 ```r
 install.packages("remotes")
-remotes::install_github("intro-rstats/intRo@v1.0.6", build_vignettes = TRUE)
+remotes::install_github("intro-rstats/intRo@v1.0.7", build_vignettes = TRUE)
 ```
 
