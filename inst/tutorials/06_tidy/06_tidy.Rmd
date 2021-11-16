@@ -17,6 +17,7 @@ library(intRo)
 data("messy_fruit")
 data("slavery")
 data("yoda_corpus")
+data("person_united")
 library(palmerpenguins)
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -131,17 +132,69 @@ In some cases, a data frame might have one column with values from two or more v
 
 `separate()` lets you split the column into separate columns, while with `unite()` you can merge two or more columns into one.
 
-```{r sep-data, exercise=TRUE}
+Let's see how it works.
 
+### Separate
+
+Here's some data
+
+```{r sep-data, exercise=TRUE}
+person_united
 ```
 
+This data frame has two columns, but the second column `scores` contains personality scores of five different traits: `openness`, `agreeableness`, `emotional_stability`, `conscientiousness`, and `extraversion`.
+
+Let's separate the `score` column into the individual scores.
 
 ```{r separate, exercise=TRUE}
+person_sep <- person_united %>%
+  separate(col = scores, into = c(...))
 
+person_sep
 ```
 
-```{r unite, exercise=TRUE}
+```{r separate-hint, echo=FALSE}
+c("openness", "agreeableness", "emotional_stability", "conscientiousness", "extraversion")
+```
 
+Great! Now, let's pivot the data frame so that it has, apart from the `userid` column, two columns: `trait` with the trait names, and `score` with the trait score.
+
+```{r pivot-pers-setup, echo=FALSE}
+person_sep <- person_united %>%
+  separate(col = scores, into = c("openness", "agreeableness", "emotional_stability", "conscientiousness", "extraversion"))
+```
+
+```{r pivot-pers, exercise=TRUE}
+person_pivot <- person_sep %>%
+  ...
+
+# Check it worked
+person_pivot
+```
+
+<div id="pivot-pers-hint">
+**Hint:** You might want to use `pivot_longer()`. 
+</div>
+
+If pivoting worked out correctly, the following code should work and output a plot with each trait in different panel rows.
+
+```{r facet-pers, exercise=TRUE, exercise.setup="pivot-pers"}
+personality %>%
+  ggplot(aes(value, fill = trait)) +
+  geom_bar() +
+  facet_grid(trait ~ .)
+```
+
+### Unite
+
+The opposite of `separate()` is `unite()`.
+`unite()` needs the name of the new column as a string and the names of the columns it has to unite.
+
+```{r unite, exercise=TRUE, exercise.setup="pivot-pers-setup"}
+person_united <- person_sep %>%
+  unite("score", openness:extraversion)
+
+person_united
 ```
 
 

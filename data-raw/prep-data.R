@@ -91,3 +91,8 @@ personality <- read_csv("data-raw/2018-personality-data.csv") %>%
   pivot_longer(openness:extraversion, names_to = "trait", "response") %>%
   select(-userid)
 usethis::use_data(personality)
+
+person_united <- read_csv("data-raw/2018-personality-data.csv") %>%
+  mutate(across(where(is.numeric), round)) %>%
+  unite("scores", openness:extraversion)
+usethis::use_data(person_united)

@@ -63,6 +63,13 @@
 #' @source Arslan Ali, \url{https://www.kaggle.com/arslanali4343/top-personality-dataset}
 "personality"
 
+#' Top Personality Dataset
+#'
+#' (MBTI) Myers-Briggs Personality Type Dataset. The scores are in a single column.
+#'
+#' @source Arslan Ali, \url{https://www.kaggle.com/arslanali4343/top-personality-dataset}
+"person_united"
+
 #' The pyramids of Egypt
 #'
 #' Information on the pyramids of Egypt.
