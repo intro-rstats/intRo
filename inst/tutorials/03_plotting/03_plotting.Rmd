@@ -275,11 +275,20 @@ If we wish to use a different type of line depending on the values of a column, 
 
 Change the plot on land use so that it uses both `colour` and `linetype` to differentiate the type of land use.
 
+Remember to add `year` and `area` as the axes.
+
 ```{r land-use-line, exercise=TRUE, exercise.setup = "tidy-load"}
 land_use %>%
   ggplot(aes(..., ..., ...)) +
   geom_line(size = 2)
 ```
+
+```{r land-use-line-hint}
+land_use %>%
+  ggplot(aes(year, area, ...)) +
+  geom_line(size = 2)
+```
+
 
 ### The end!
 

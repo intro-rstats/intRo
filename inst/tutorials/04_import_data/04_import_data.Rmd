@@ -91,14 +91,8 @@ After you have imported data into R, you might want to filter rows, create new c
 We will work with the `pyramids` data frame.
 Here's what it looks like.
 
-```{r pyr}
+```{r pyr, exercise=TRUE}
 pyramids
-```
-
-Now inspect the data.
-
-```{r pyr-inspect, exercise=TRUE}
-
 ```
 
 
@@ -137,9 +131,13 @@ question(
 
 Let's try again now using the pipe `%>%`.
 Do you remember how it works?
+Change the code below so that it uses the pipe.
 
 ```{r saqq-pipe, exercise=TRUE}
-
+filter(
+  pyramids,
+  Site == "Saqqara"
+)
 ```
 
 ### Logical operators
@@ -207,6 +205,10 @@ pyramids %>%
   )
 ```
 
+<div id="dahshur-10-hint">
+**Hint:** Be careful about the order in the "not equal to" operator `!=`.  
+</div>
+
 
 ## Mutate
 
@@ -243,7 +245,14 @@ We are comparing two objects here, so we use two equals, not just one.
 
 Check the data now to look at the `square` column.
 
-```{r pyr-square, exercise=TRUE, exercise.setup="square"}
+```{r pyr-square-setup}
+pyramids <- pyramids %>%     # Ceci c'est un pipe. ;)
+  mutate(
+    square = Base1 == Base2
+  )
+```
+
+```{r pyr-square, exercise=TRUE}
 pyramids
 ```
 
