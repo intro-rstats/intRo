@@ -23,6 +23,124 @@ data("personality")
 data("harry_potter")
 ```
 
+## Faceting
+
+**Faceting** allows you to split data in a plot into separate panels.
+
+You can facet both vertically or horizontally.
+
+### I am still waiting for my Howgwarts letter...
+
+Let's do that with the Harry Potter data.
+The data frame looked like this.
+
+```{r hp, exercise=TRUE}
+harry_potter
+```
+
+We have seen a plot of the data before.
+
+Reproduce it with the following code.
+
+```{r hp-plot, exercise=TRUE}
+harry_potter %>%
+  ggplot(aes(element, fill = house)) +
+  geom_bar(position = "dodge") +
+  # scale_fill_manual() lets you manually specify colours.
+  scale_fill_manual(
+    values = c("#76040a", "#f29e02", "#0121a2", "#1d492c")
+  )
+```
+
+Now let's plot the number of people in each astrological sign and house.
+
+```{r hp-sign, exercise=TRUE}
+harry_potter %>%
+  ggplot(aes(sign, fill = house)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(
+    values = c("#76040a", "#f29e02", "#0121a2", "#1d492c")
+  )
+```
+
+It's a bit too dense isn't it?
+
+We can improve on that by faceting `house` so that each house has its own panel.
+
+### Facets
+
+You can facet with `facet_grid()`.
+This function needs a formula of the form `rows ~ columns`, where `rows` and `columns` are names of columns from the data frame.
+If you want to facet just by row or just by column, you can replace the other side of the formula with a full stop `.`: `rows ~ .`, `. ~ columns`.
+
+Let's see an example with the former.
+
+```{r hp-facet-house, exercise=TRUE}
+harry_potter %>%
+  ggplot(aes(sign, fill = house)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(
+    values = c("#76040a", "#f29e02", "#0121a2", "#1d492c")
+  ) +
+  facet_grid(house ~ .)
+```
+
+Much better now!
+The code `facet_grid(house ~ .)` asks ggplot2 to facet the data by `house` and display the panels as individual rows.
+
+Try now to facet by `element` and to display each element as a separate vertical panel (column) rather than horizontally (rows).
+
+```{r hp-facet-element, exercise=TRUE}
+harry_potter %>%
+  ggplot(aes(house, fill = house)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(
+    values = c("#76040a", "#f29e02", "#0121a2", "#1d492c")
+  ) +
+  ...
+```
+
+Wonderful!
+
+### Wrapping up
+
+When you have many values in a column you want to display in separate panels spanning rows and columns, you can use `facet_wrap()`.
+
+Like `facet_grid()`, `facet_wrap()` needs a function, but it only takes functions of the type `. ~ colname`.
+In fact, you can omit the full stop `.` and write `~ colname`.
+
+(You can do the same with `facet_grid()`: `facet_grid(~ element)` will work too. But `facet_grid(house ~)` does not!)
+
+Here's how that looks like!
+
+```{r hp-wrap, exercise=TRUE}
+harry_potter %>%
+  ggplot(aes(house, fill = house)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(
+    values = c("#76040a", "#f29e02", "#0121a2", "#1d492c")
+  ) +
+  facet_wrap(~ sign)
+```
+
+That's easy, right?
+There's so much more to learn about ggplot2.
+But for this workshop we are stopping here.
+
+You can find more in the *R for Data Science book*, a **great** resource for self-guided learning.
+You can read the book here: <https://r4ds.had.co.nz>.
+
+In the following sections you will go through a "showreel" of other things you can do with R, most of which can be done with tidyverse packages or packages that work well with the tidyverse.
+
+In these sections, I will point you to external resources where you can learn more about these and other advanced skills, and the last section `Extra resources` has some more pointers!
+
+I hope you enjoyed this data journey and that you will want to use R for your data analysis in the future!
+
+```{r cu, echo=FALSE, out.width=500, fig.align='center'}
+knitr::include_graphics("images/matthew-henry-2Ts5HnA67k8-unsplash.jpg")
+```
+
+
 ## Maps, maps, maps!
 
 It's very easy to plot maps in R.
@@ -95,6 +213,8 @@ You can see worked out examples at these websites:
 - <http://rnotr.com/likert/ggplot/barometer/likert-plots/> for ggplot2.
 - <https://rpubs.com/tskam/likert> for `likert()`
 
+![](images/outlook.svg)
+
 Due to time constraints we won't be able to go through them, but everything you learnt during the workshop will have gotten you up to speed to be able to follow the instructions in the links above.
 
 ### Alluvial plots
@@ -144,3 +264,18 @@ harry_potter %>%
 ```
 
 Read more about them here: <https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise>
+
+## Extra resources
+
+* [R for Data Science](https://r4ds.had.co.nz).
+
+* [Exploratory data analysis with R](https://bookdown.org/rdpeng/exdata/).
+
+* The [tidyverse website](https://www.tidyverse.org).
+
+* [RStudio Education](https://education.rstudio.com).
+
+* [Rmarkdown The definite guide](https://bookdown.org/yihui/rmarkdown/).
+
+* Create your own R tutorial with [learnr](https://rstudio.github.io/learnr/).
+
